@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://d00kgk3cxwv57"]
+
+[ext_resource type="Script" path="res://camera.gd" id="1_cybts"]
+[ext_resource type="Script" path="res://main.gd" id="1_snh0u"]
+
+[sub_resource type="Environment" id="Environment_ss1b0"]
+background_mode = 1
+background_color = Color(0.0189402, 0.0189402, 0.0189402, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.399428, 0.399428, 0.399428, 1)
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_snh0u")
+
+[node name="player" type="Node" parent="."]
+
+[node name="cam_pos" type="Marker3D" parent="player"]
+
+[node name="camera" type="Camera3D" parent="player/cam_pos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+current = true
+fov = 100.0
+script = ExtResource("1_cybts")
+
+[node name="node2d" type="Node2D" parent="player/cam_pos/camera"]
+
+[node name="cam_look" type="Marker3D" parent="player"]
+
+[node name="cam_pos_to" type="Marker3D" parent="player"]
+
+[node name="timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ss1b0")
+
+[node name="points" type="MultiMeshInstance3D" parent="."]
+
+[node name="wires" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="control" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
