@@ -64,6 +64,7 @@ func generate_points3() -> void:
 		var new_point:Point = Point.new()
 		new_point.idx = int(data[0])
 		new_point.position = random_position
+		Globals.fast_access_to_points[data[0]] = new_point
 		#points.append(random_position)
 		var trans := Transform3D(Basis.IDENTITY, random_position)
 		new_multimesh.set_instance_transform(i, trans)
