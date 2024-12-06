@@ -50,3 +50,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="mc" type="MarginContainer" parent="ui/control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="hbc" type="HBoxContainer" parent="ui/control/mc"]
+layout_mode = 2
+
+[node name="line" type="LineEdit" parent="ui/control/mc/hbc"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "id of point"
+
+[node name="find_button" type="Button" parent="ui/control/mc/hbc"]
+layout_mode = 2
+text = "Find point"

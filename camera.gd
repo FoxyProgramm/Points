@@ -55,3 +55,7 @@ func _input(event: InputEvent) -> void:
 		get_tree().quit()
 	if event.is_action_pressed("gen"):
 		$"../../..".generate_thing()
+
+func move_to(pos:Vector3) -> void:
+	$"../../cam_pos_to".global_position = pos
+	actual_zoom = Vector3(0, 0, 4)

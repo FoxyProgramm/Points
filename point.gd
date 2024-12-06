@@ -6,15 +6,16 @@ var idx:int = 0
 var name:String = ""
 var description:String = ""
 var position:Vector3 = Vector3()
+var pixel_position:Vector2i = Vector2i()
 var connected_with_points = []
 var need_to_connect_with = []
 
-func _init() -> void:
-	Globals.find_idx.connect(func(value:int):
-		if value == idx:
-			Globals.finded_point = self
-			Globals.point_finded.emit()
+func find_pixel_locaion() -> void:
+	pixel_position = Vector2i(
+		idx - ( int(idx/float(Globals.global_texture_size.x)) * Globals.global_texture_size.x ),
+		floori(idx/float(Globals.global_texture_size.x))
 		)
+	
 
 func connect_to(point:Point) -> void:
 	connected_with_points.append(point.idx)

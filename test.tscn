@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://bedx45h5wgmoq"]
+
+[ext_resource type="Script" path="res://test.gd" id="1_hu7x3"]
+[ext_resource type="Script" path="res://camera.gd" id="2_juekn"]
+[ext_resource type="Script" path="res://drawing.gd" id="4_34ewa"]
+[ext_resource type="Texture2D" uid="uid://c4stb7m8688p5" path="res://blank.png" id="4_mreli"]
+
+[sub_resource type="Environment" id="Environment_g2dqe"]
+background_mode = 1
+background_color = Color(0.0189402, 0.0189402, 0.0189402, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.399428, 0.399428, 0.399428, 1)
+glow_enabled = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pposl"]
+viewport_path = NodePath("texture3")
+
+[node name="test" type="Node3D"]
+script = ExtResource("1_hu7x3")
+global_count_of_points = 1024
+max_count_per_call = 10240
+count_of_meshes = 0
+max_radius = 80.0
+
+[node name="player" type="Node" parent="."]
+
+[node name="cam_pos" type="Marker3D" parent="player"]
+
+[node name="camera" type="Camera3D" parent="player/cam_pos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+current = true
+fov = 100.0
+script = ExtResource("2_juekn")
+
+[node name="node2d" type="Node2D" parent="player/cam_pos/camera"]
+
+[node name="cam_look" type="Marker3D" parent="player"]
+
+[node name="cam_pos_to" type="Marker3D" parent="player"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g2dqe")
+
+[node name="meshes" type="Node3D" parent="."]
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../mesh")
+
+[node name="collisions" type="Node3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 3.0
+
+[node name="Label" type="Label" parent="."]
+offset_top = 136.0
+offset_right = 40.0
+offset_bottom = 159.0
+
+[node name="texture" type="TextureRect" parent="."]
+offset_right = 362.0
+offset_bottom = 340.0
+texture = SubResource("ViewportTexture_pposl")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="texture3" type="SubViewport" parent="."]
+render_target_clear_mode = 1
+
+[node name="Node2D" type="Node2D" parent="texture3"]
+script = ExtResource("4_34ewa")
+draw_points_per_tick = 50
+
+[node name="TextureRect" type="TextureRect" parent="texture3"]
+visible = false
+custom_minimum_size = Vector2(512, 512)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_mreli")
+expand_mode = 1

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dpf74ifoggq7t"
+path="res://.godot/imported/ico_sphere.obj-292c530cf1c01349b2f4deeb3fb45fa4.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ico_sphere.obj-292c530cf1c01349b2f4deeb3fb45fa4.mesh"]
+
+source_file="res://ico_sphere.obj"
+dest_files=["res://.godot/imported/ico_sphere.obj-292c530cf1c01349b2f4deeb3fb45fa4.mesh", "res://.godot/imported/ico_sphere.obj-292c530cf1c01349b2f4deeb3fb45fa4.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -60,13 +60,13 @@ func generate_points3() -> void:
 	for raw_data in file_data:
 		var data = raw_data.split('	')
 		#var random_position:Vector3 = get_random_point_circle(10,40)
-		var random_position:Vector3 = Vector3(float(data[1]), float(data[2]), float(data[3]))*0.08
+		var random_position:Vector3 = Vector3(float(data[1]), float(data[2]), float(data[3]))*0.06
 		var new_point:Point = Point.new()
 		new_point.idx = int(data[0])
 		new_point.position = random_position
 		Globals.fast_access_to_points[data[0]] = new_point
 		#points.append(random_position)
-		var trans := Transform3D(Basis.IDENTITY, random_position)
+		var trans := Transform3D(Basis.IDENTITY.scaled(Vector3(.1,.1,.1)), random_position)
 		new_multimesh.set_instance_transform(i, trans)
 		Globals.all_points.append(new_point)
 		i+=1
@@ -118,9 +118,15 @@ func generate_thing() -> void:
 
 func _ready() -> void:
 	#await get_tree().create_timer(1.0).timeout
-	mesh = BoxMesh.new()
-	mesh.size = Vector3(0.1,0.1,0.1)
-	mesh.material = def_material
+	$ui/control/mc/hbc/find_button.pressed.connect(func():
+		var key = $ui/control/mc/hbc/line.text
+		if not Globals.fast_access_to_points.has(key): return
+		var _point:Point = Globals.fast_access_to_points[key]
+		if _point != null: $player/cam_pos_to.position = _point.position; $player/cam_pos/camera.actual_zoom = Vector3(0, 0, 0.5)
+		)
+	mesh = preload("res://ico_sphere.obj")
+	#mesh.size = Vector3(0.1,0.1,0.1)
+	mesh.set('surface_0/material', def_material)
 	immediate_mesh = ImmediateMesh.new()
 	$wires.mesh = immediate_mesh
 	#generate_points(10000, 0.0)

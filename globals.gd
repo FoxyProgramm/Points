@@ -1,12 +1,30 @@
 extends Node
 
-signal find_idx(_idx)
-signal point_finded
-var finded_point:Point = null
+var box_array:PackedVector3Array = [
+		#Z+ face
+		Vector3(0.5, 0.5, 0.5), Vector3(0.5, 0.5, -0.5), Vector3(0.5, -0.5, -0.5),
+		Vector3(0.5, -0.5, -0.5), Vector3(0.5, -0.5, 0.5), Vector3(0.5, 0.5, 0.5),
+		#X- face
+		Vector3(-0.5, 0.5, 0.5), Vector3(0.5, 0.5, 0.5), Vector3(0.5, -0.5, 0.5),
+		Vector3(0.5, -0.5, 0.5), Vector3(-0.5, -0.5, 0.5), Vector3(-0.5, 0.5, 0.5),
+		#Z- face
+		Vector3(-0.5, 0.5, -0.5), Vector3(-0.5, -0.5, -0.5), Vector3(0.5, 0.5, -0.5),
+		Vector3(0.5, -0.5, -0.5), Vector3(0.5, 0.5, -0.5), Vector3(-0.5, -0.5, -0.5),
+		#X+ face
+		Vector3(-0.5, 0.5, -0.5), Vector3(-0.5, 0.5, 0.5), Vector3(-0.5, -0.5, -0.5),
+		Vector3(-0.5, 0.5, 0.5), Vector3(-0.5, -0.5, 0.5), Vector3(-0.5, -0.5, -0.5),
+		#Y+face
+		Vector3(0.5, 0.5, 0.5), Vector3(-0.5, 0.5, 0.5), Vector3(0.5, 0.5, -0.5),
+		Vector3(-0.5, 0.5, -0.5), Vector3(0.5, 0.5, -0.5), Vector3(-0.5, 0.5, 0.5),
+		#Y-face
+		Vector3(0.5, -0.5, 0.5), Vector3(0.5, -0.5, -0.5), Vector3(-0.5, -0.5, 0.5),
+		Vector3(-0.5, -0.5, -0.5), Vector3(-0.5, -0.5, 0.5), Vector3(0.5, -0.5, -0.5)
+	]
+
+var global_texture_size = Vector2i(512, 512)
 
 var all_points:Array[Point] = []
 var fast_access_to_points:Dictionary = {}
-#var all_points = []
 var distance_matrix:Array = []
 
 func resize_distance_matrix(value:int) -> void:
